@@ -2,9 +2,10 @@
 
 Welcome to the Chatroom API! This API allows users to create, join, and leave chatrooms, send messages (including attachments), and retrieve messages from chatrooms in real-time. It utilizes Laravel with Sanctum for authentication, Pusher for real-time features, and WebSocket for efficient communication.
 
-## Table of Contents
+## API Documentation
+    (https://app.swaggerhub.com/apis-docs/NABEELAHMED030/Chatroom/1.0.0)
 
-- [API Documentation](https://app.swaggerhub.com/apis-docs/NABEELAHMED030/Chatroom/1.0.0)
+## Table of Contents
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -29,7 +30,7 @@ To set up the Chatroom API locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://your-repository-url.git
+   git clone https://github.com/nabeel030/chatroom.git
    cd chatroom
 
 2. **Install Dependencies:**
@@ -38,6 +39,18 @@ To set up the Chatroom API locally, follow these steps:
 
 3. **Set up environment variables:**
     - Rename the .env.example file to .env and update the database and other configuration settings as needed.
+    ```bash
+    DB_DATABASE=yourdbname
+    DB_USERNAME=yourdbusername
+    DB_PASSWORD=yourdbpassword
+
+    PUSHER_APP_ID=yourpusherappid
+    PUSHER_APP_KEY=yourpusherappkey
+    PUSHER_APP_SECRET=yourpusherappsecret
+
+    OCTANE_SERVER=swoole
+    
+    
 
 4. **Generate the application key:**
    ```bash
