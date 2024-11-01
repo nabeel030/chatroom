@@ -40,6 +40,15 @@ return [
 
     'server' => env('OCTANE_SERVER', 'roadrunner'),
 
+    'swoole' => [
+    'options' => [
+        'worker_num' => swoole_cpu_num() * 2, // Number of worker processes
+        'task_worker_num' => swoole_cpu_num() * 2, // Task worker processes
+        'max_request' => 10000, // Max requests per worker
+        'package_max_length' => 10 * 1024 * 1024, // Allow up to 10MB for large messages
+    ],
+],
+
     /*
     |--------------------------------------------------------------------------
     | Force HTTPS
@@ -52,6 +61,7 @@ return [
     */
 
     'https' => env('OCTANE_HTTPS', false),
+    
 
     /*
     |--------------------------------------------------------------------------

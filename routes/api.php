@@ -10,7 +10,7 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/chatrooms/create', [ChatroomController::class, 'create']);
-    Route::get('/chatrooms', [ChatroomController::class, 'index']);
+    Route::get('/chatrooms/list', [ChatroomController::class, 'index']);
     Route::post('/chatrooms/{id}/enter', [ChatroomController::class, 'enter']);
     
     Route::middleware('check.user.in.chatroom')->group(function () {
