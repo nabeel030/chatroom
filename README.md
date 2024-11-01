@@ -50,8 +50,6 @@ To set up the Chatroom API locally, follow these steps:
 
     OCTANE_SERVER=swoole
     
-    
-
 4. **Generate the application key:**
    ```bash
    php artisan key:generate
