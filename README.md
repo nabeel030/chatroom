@@ -3,7 +3,7 @@
 Welcome to the Chatroom API! This API allows users to create, join, and leave chatrooms, send messages (including attachments), and retrieve messages from chatrooms in real-time. It utilizes Laravel with Sanctum for authentication, Pusher for real-time features, and WebSocket for efficient communication.
 
 ## API Documentation
-    (https://app.swaggerhub.com/apis-docs/NABEELAHMED030/Chatroom/1.0.0)
+    [https://app.swaggerhub.com/apis-docs/NABEELAHMED030/Chatroom/1.0.0](https://app.swaggerhub.com/apis-docs/NABEELAHMED030/Chatroom/1.0.0)
 
 ## Table of Contents
 - [Technologies](#technologies)
