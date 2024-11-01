@@ -4,13 +4,11 @@ Welcome to the Chatroom API! This API allows users to create, join, and leave ch
 
 ## Table of Contents
 
+- [API Documentation](https://app.swaggerhub.com/apis-docs/NABEELAHMED030/Chatroom/1.0.0)
 - [Technologies](#technologies)
 - [Installation](#installation)
-- [API Documentation](#api-documentation)
-- [Endpoints](#endpoints)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Technologies
 
@@ -52,4 +50,18 @@ To set up the Chatroom API locally, follow these steps:
 5. **Start the server:**
    ```bash
    php artisan serve
+
+
+## Usage
+-  Authentication: Use the /login or /register endpoint to authenticate and receive a token. This token should be included in the Authorization header for subsequent requests:
+- Chatroom Operations: Use the endpoints described in the api documentation.
+
+## Contributing
+ Contributions are welcome! Please follow these steps to contribute:
+
+- Fork the repository.
+- Create a new branch (git checkout -b feature/YourFeature).
+- Commit your changes (git commit -m 'Add some feature').
+- Push to the branch (git push origin feature/YourFeature).
+- Open a pull request.
 
