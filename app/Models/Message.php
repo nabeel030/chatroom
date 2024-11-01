@@ -10,7 +10,7 @@ class Message extends Model
         'chatroom_id',
         'user_id',
         'message_text',
-        'attachment',
+        'attachment_path',
     ];
 
     public function chatroom() {

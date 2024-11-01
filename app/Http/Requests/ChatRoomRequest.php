@@ -6,13 +6,13 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class LoginRequest extends FormRequest
+class ChatRoomRequest extends FormRequest
 {
     public function rules()
     {
         return [
-            'email' => 'required|string|email',
-            'password' => 'required|string',
+            'name' => 'required|string|max:255',
+            'max_members' => 'required'
         ];
     }
 
@@ -26,6 +26,6 @@ class LoginRequest extends FormRequest
 
     public function authorize()
     {
-        return true; 
+        return true;
     }
 }

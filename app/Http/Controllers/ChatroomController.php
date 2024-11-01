@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Chatroom;
 use Illuminate\Http\Request;
+use App\Http\Requests\ChatRoomRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ChatroomController extends Controller
 {
     // Create a new chatroom
-    public function create(Request $request)
+    public function create(ChatRoomRequest $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -20,6 +21,8 @@ class ChatroomController extends Controller
             'name' => $request->name,
             'max_members' => $request->max_members
         ]);
+
+        // $chatroom->attach(Auth::id());
 
         return response()->json($chatroom, 201);
     }
@@ -65,12 +68,10 @@ class ChatroomController extends Controller
             return response()->json(['error' => 'Chatroom not found'], 404);
         }
 
-        // Check if the user is in the chatroom
-        if (!$chatroom->users()->where('users.id', 1)->exists()) {
+        if (!$chatroom->users()->where('users.id', Auth::id())->exists()) {
             return response()->json(['message' => 'You are not in this chatroom.'], 200);
         }
 
-        // Remove the user from the chatroom
         $chatroom->users()->detach(Auth::id());
 
         return response()->json(['message' => 'You have left the chatroom successfully.'], 200);

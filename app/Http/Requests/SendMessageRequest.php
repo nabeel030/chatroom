@@ -10,22 +10,21 @@ class SendMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'message' => 'required|string|max:255',
-            'attachment' => 'nullable|file|max:20480', // max size of 20MB
+            'message' => 'nullable|string|max:255|required_without:attachment',
+            'attachment' => 'nullable|file|required_without:message',
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
-        // Customize the error response
         throw (new ValidationException($validator, response()->json([
             'error' => 'Validation failed',
             'messages' => $validator->errors(),
-        ], 422))); // HTTP status code for Unprocessable Entity
+        ], 422))); 
     }
 
     public function authorize()
     {
-        return true; // Allow all users to send messages (you can adjust this as needed)
+        return true; 
     }
 }

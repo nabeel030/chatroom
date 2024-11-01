@@ -29,9 +29,9 @@ class CheckUserInChatroom
         }
 
         if (!$chatroom->users()->where('users.id', Auth::id())->exists()) {
-            return response()->json(['error' => 'Join chatroom ' . $chatroom->name . '" to make activity!'], 403);
+            return response()->json(['error' => 'Join chatroom "' . $chatroom->name . '" to make activity!'], 403);
         }
-
+        
         return $next($request);
     }
 }

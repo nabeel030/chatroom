@@ -18,15 +18,14 @@ class RegisterRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        // Customize the error response
         throw (new ValidationException($validator, response()->json([
             'error' => 'Validation failed',
             'messages' => $validator->errors(),
-        ], 422))); // HTTP status code for Unprocessable Entity
+        ], 422))); 
     }
 
     public function authorize()
     {
-        return true; // Allow all users to register
+        return true;
     }
 }

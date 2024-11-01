@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Chatroom;
 use App\Models\Message;
-use App\Http\Requests\SendMessageRequest;
+use App\Events\SendMessage;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\SendMessageRequest;
 
 class MessageController extends Controller
 {
-    // Send a message to a chatroom
     public function send(SendMessageRequest $request, $id)
     {
         $chatroom = Chatroom::find($id);
@@ -19,29 +19,42 @@ class MessageController extends Controller
         }
 
         $attachmentPath = null;
+
         if ($request->hasFile('attachment')) {
             $attachment = $request->file('attachment');
-            $attachmentPath = $attachment->store('attachments'); 
+            $mimeType = $attachment->getMimeType();
+        
+            if (str_contains($mimeType, 'video')) {
+                $directory = 'video';
+            } elseif (str_contains($mimeType, 'image')) {
+                $directory = 'picture';
+            } else {
+                $directory = 'attachments/other'; 
+            }
+        
+            $attachmentPath = $attachment->store($directory, 'public');
         }
 
-        // Create the message
         $message = Message::create([
             'chatroom_id' => $chatroom->id,
             'user_id' => Auth::id(),
             'message_text' => $request->input('message'),
-            'attachment_path' => $attachmentPath,
+            'attachment_path' => $attachmentPath
         ]);
 
-        // Optionally, broadcast the message to the WebSocket server here
+        SendMessage::broadcast(
+            Auth::user(),
+            $chatroom->id,
+            $request->input('message') ?? $attachmentPath
+        );
 
         return response()->json(['message' => 'Message sent successfully.', 'data' => $message], 201);
 
     }
 
-    // List messages in a chatroom
     public function list($id)
     {
-        $messages = Message::where('chatroom_id', $id)->get();
+        $messages = Message::where('chatroom_id', $id)->get();  
         return response()->json($messages);
     }
 }
