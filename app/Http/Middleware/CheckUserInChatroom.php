@@ -22,15 +22,12 @@ class CheckUserInChatroom
     public function handle(Request $request, Closure $next)
     {   
         $chatroomId = $request->route('id');
-
-        // Find the chatroom by ID
         $chatroom = Chatroom::find($chatroomId);
 
         if (!$chatroom) {
             return response()->json(['error' => 'Chatroom not found'], 404);
         }
 
-        // Check if the user is part of the chatroom
         if (!$chatroom->users()->where('users.id', Auth::id())->exists()) {
             return response()->json(['error' => 'Join chatroom ' . $chatroom->name . '" to make activity!'], 403);
         }
